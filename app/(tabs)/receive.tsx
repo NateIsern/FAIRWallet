@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, Clipboard } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import * as Crypto from 'expo-crypto';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function ReceiveScreen() {
   const [walletAddress, setWalletAddress] = useState('your-wallet-address-here');
@@ -21,6 +22,7 @@ export default function ReceiveScreen() {
 
   return (
     <View style={styles.container}>
+      <IconSymbol size={28} name="receive" color="#000" />
       <Text style={styles.title}>Receive FairCoin</Text>
       <Text style={styles.address}>{walletAddress}</Text>
       <QRCode value={walletAddress} size={200} />

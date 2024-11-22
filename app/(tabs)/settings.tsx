@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import * as Crypto from 'expo-crypto';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function SettingsScreen() {
   const handleChangePassword = async () => {
@@ -23,6 +24,7 @@ export default function SettingsScreen() {
 
   return (
     <View style={styles.container}>
+      <IconSymbol size={28} name="settings" color="#000" />
       <Text style={styles.title}>Wallet Settings</Text>
       <Button title="Change Password" onPress={handleChangePassword} />
       <Button title="Backup Wallet" onPress={handleBackupWallet} />

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import * as Crypto from 'expo-crypto';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function SendScreen() {
   const [recipient, setRecipient] = useState('');
@@ -28,6 +29,7 @@ export default function SendScreen() {
 
   return (
     <View style={styles.container}>
+      <IconSymbol size={28} name="send" color="#000" />
       <TextInput
         style={styles.input}
         placeholder="Recipient Address"

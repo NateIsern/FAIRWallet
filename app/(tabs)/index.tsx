@@ -5,6 +5,7 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { fetchTransactions as fetchTransactionsFromStore } from '@/store/transactions';
+import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function HomeScreen() {
   const [balance, setBalance] = useState(0);
@@ -30,6 +31,7 @@ export default function HomeScreen() {
 
   const renderTransaction = ({ item }) => (
     <View style={styles.transaction}>
+      <IconSymbol size={20} name="paperplane.fill" color="#000" />
       <Text>Amount: {item.amount}</Text>
       <Text>Date: {item.date}</Text>
     </View>
@@ -78,6 +80,9 @@ const styles = StyleSheet.create({
     padding: 8,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   reactLogo: {
     height: 178,
