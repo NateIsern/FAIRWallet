@@ -4,7 +4,7 @@ import * as Crypto from 'expo-crypto';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
-import { fetchTransactions } from '@/store/transactions';
+import { fetchTransactions as fetchTransactionsFromStore } from '@/store/transactions';
 
 export default function HomeScreen() {
   const [balance, setBalance] = useState(0);
@@ -24,7 +24,7 @@ export default function HomeScreen() {
   };
 
   const fetchTransactions = async () => {
-    const transactions = await fetchTransactions('your-wallet-address');
+    const transactions = await fetchTransactionsFromStore('your-wallet-address');
     setTransactions(transactions);
   };
 
