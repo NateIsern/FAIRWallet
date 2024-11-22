@@ -36,6 +36,9 @@ export default function RootLayout() {
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" />
+        <Stack.Screen name="send" options={{ title: "Send FairCoin" }} />
+        <Stack.Screen name="receive" options={{ title: "Receive FairCoin" }} />
+        <Stack.Screen name="settings" options={{ title: "Wallet Settings" }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
