@@ -7,7 +7,6 @@ export default function SendScreen() {
   const [amount, setAmount] = useState('');
 
   const handleSend = async () => {
-    // Implement send transaction logic here
     const transactionHash = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
       `${recipient}-${amount}`
