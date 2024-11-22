@@ -1,12 +1,8 @@
 import * as Crypto from 'expo-crypto';
-import { ElectrumClient } from 'electrum-client';
-
-const electrumClient = new ElectrumClient('electrum-server-address', 50001, 'tcp');
 
 export const fetchTransactions = async (walletAddress) => {
-  await electrumClient.connect();
-  const transactions = await electrumClient.blockchainAddress_getHistory(walletAddress);
-  await electrumClient.close();
+  // Implement your logic to fetch transactions from the backend or any other source
+  const transactions = []; // Replace with actual logic to fetch transactions
   return transactions;
 };
 
