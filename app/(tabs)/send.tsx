@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import * as Crypto from 'expo-crypto';
 
 export default function SendScreen() {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
 
-  const handleSend = () => {
+  const handleSend = async () => {
     // Implement send transaction logic here
-    console.log(`Sending ${amount} to ${recipient}`);
+    const transactionHash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      `${recipient}-${amount}`
+    );
+    console.log(`Sending ${amount} to ${recipient} with transaction hash: ${transactionHash}`);
+  };
+
+  const confirmSend = () => {
+    Alert.alert(
+      'Confirm Send',
+      `Are you sure you want to send ${amount} to ${recipient}?`,
+      [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Send', onPress: handleSend },
+      ],
+      { cancelable: true }
+    );
   };
 
   return (
@@ -25,7 +42,7 @@ export default function SendScreen() {
         onChangeText={setAmount}
         keyboardType="numeric"
       />
-      <Button title="Send" onPress={handleSend} />
+      <Button title="Send" onPress={confirmSend} />
     </View>
   );
 }

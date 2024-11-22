@@ -1,15 +1,24 @@
 import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
+import * as Crypto from 'expo-crypto';
 
 export default function SettingsScreen() {
-  const handleChangePassword = () => {
+  const handleChangePassword = async () => {
     // Implement change password logic here
-    console.log('Change password');
+    const passwordHash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      'new-password'
+    );
+    console.log('Change password', passwordHash);
   };
 
-  const handleBackupWallet = () => {
+  const handleBackupWallet = async () => {
     // Implement backup wallet logic here
-    console.log('Backup wallet');
+    const backupHash = await Crypto.digestStringAsync(
+      Crypto.CryptoDigestAlgorithm.SHA256,
+      'wallet-backup'
+    );
+    console.log('Backup wallet', backupHash);
   };
 
   return (
