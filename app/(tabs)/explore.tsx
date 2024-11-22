@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, FlatList, Text } from 'react-native';
+import { StyleSheet, View, FlatList, Text, Picker } from 'react-native';
 import { fetchTransactions } from '@/store/transactions';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -8,13 +8,14 @@ import { IconSymbol } from '@/components/ui/IconSymbol';
 
 export default function TabTwoScreen() {
   const [transactions, setTransactions] = useState([]);
+  const [selectedWallet, setSelectedWallet] = useState('');
 
   useEffect(() => {
     fetchTransactionsList();
-  }, []);
+  }, [selectedWallet]);
 
   const fetchTransactionsList = async () => {
-    const transactions = await fetchTransactions('your-wallet-address');
+    const transactions = await fetchTransactions(selectedWallet);
     setTransactions(transactions);
   };
 
@@ -40,6 +41,17 @@ export default function TabTwoScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
+      <ThemedView style={styles.walletSelectionContainer}>
+        <Picker
+          selectedValue={selectedWallet}
+          style={styles.input}
+          onValueChange={(itemValue) => setSelectedWallet(itemValue)}
+        >
+          <Picker.Item label="Wallet 1" value="wallet1" />
+          <Picker.Item label="Wallet 2" value="wallet2" />
+          <Picker.Item label="Wallet 3" value="wallet3" />
+        </Picker>
+      </ThemedView>
       <ThemedView style={styles.transactionsContainer}>
         <ThemedText type="subtitle">Transactions</ThemedText>
         <FlatList
@@ -62,6 +74,9 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+  },
+  walletSelectionContainer: {
+    marginVertical: 16,
   },
   transactionsContainer: {
     marginVertical: 16,

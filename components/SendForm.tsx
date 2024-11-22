@@ -1,18 +1,28 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { View, TextInput, Button, StyleSheet, Picker } from 'react-native';
 import { storeTransaction } from '@/store/transactions';
 
 export default function SendForm() {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
+  const [selectedWallet, setSelectedWallet] = useState('');
 
   const handleSend = async () => {
-    console.log(`Sending ${amount} to ${recipient}`);
-    await storeTransaction({ recipient, amount });
+    console.log(`Sending ${amount} to ${recipient} from wallet ${selectedWallet}`);
+    await storeTransaction({ recipient, amount, wallet: selectedWallet });
   };
 
   return (
     <View style={styles.container}>
+      <Picker
+        selectedValue={selectedWallet}
+        style={styles.input}
+        onValueChange={(itemValue) => setSelectedWallet(itemValue)}
+      >
+        <Picker.Item label="Wallet 1" value="wallet1" />
+        <Picker.Item label="Wallet 2" value="wallet2" />
+        <Picker.Item label="Wallet 3" value="wallet3" />
+      </Picker>
       <TextInput
         style={styles.input}
         placeholder="Recipient Address"
