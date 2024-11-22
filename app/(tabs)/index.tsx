@@ -4,19 +4,18 @@ import * as Crypto from 'expo-crypto';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { fetchTransactions } from '@/store/transactions';
 
 export default function HomeScreen() {
   const [balance, setBalance] = useState(0);
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    // Fetch balance and transactions from the store
     fetchBalance();
     fetchTransactions();
   }, []);
 
   const fetchBalance = async () => {
-    // Simulate fetching balance securely using expo-crypto
     const balance = await Crypto.digestStringAsync(
       Crypto.CryptoDigestAlgorithm.SHA256,
       'dummy-balance'
@@ -25,11 +24,7 @@ export default function HomeScreen() {
   };
 
   const fetchTransactions = async () => {
-    // Simulate fetching transactions
-    const transactions = [
-      { id: '1', amount: '10', date: '2023-01-01' },
-      { id: '2', amount: '20', date: '2023-01-02' },
-    ];
+    const transactions = await fetchTransactions('your-wallet-address');
     setTransactions(transactions);
   };
 
