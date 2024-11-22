@@ -1,8 +1,13 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import { storeTransaction } from '@/store/transactions';
 
 export default function ReceiveQRCode({ walletAddress }) {
+  const handleStoreTransaction = async () => {
+    await storeTransaction({ walletAddress });
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Your Wallet Address</Text>

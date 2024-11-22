@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Button, StyleSheet } from 'react-native';
+import { storeTransaction } from '@/store/transactions';
 
 export default function SettingsOptions() {
   const handleChangePassword = () => {
@@ -7,9 +8,10 @@ export default function SettingsOptions() {
     console.log('Change password');
   };
 
-  const handleBackupWallet = () => {
+  const handleBackupWallet = async () => {
     // Implement backup wallet logic here
     console.log('Backup wallet');
+    await storeTransaction({ backupHash: 'wallet-backup' });
   };
 
   return (

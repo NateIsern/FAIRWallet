@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet } from 'react-native';
+import { storeTransaction } from '@/store/transactions';
 
 export default function SendForm() {
   const [recipient, setRecipient] = useState('');
   const [amount, setAmount] = useState('');
 
-  const handleSend = () => {
-    // Implement send transaction logic here
+  const handleSend = async () => {
     console.log(`Sending ${amount} to ${recipient}`);
+    await storeTransaction({ recipient, amount });
   };
 
   return (

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, StyleSheet, Alert } from 'react-native';
 import * as Crypto from 'expo-crypto';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { storeTransaction } from '@/store/transactions';
 
 export default function SendScreen() {
   const [recipient, setRecipient] = useState('');
@@ -13,6 +14,7 @@ export default function SendScreen() {
       `${recipient}-${amount}`
     );
     console.log(`Sending ${amount} to ${recipient} with transaction hash: ${transactionHash}`);
+    await storeTransaction({ recipient, amount, transactionHash });
   };
 
   const confirmSend = () => {

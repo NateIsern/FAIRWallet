@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import * as Crypto from 'expo-crypto';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { storeTransaction } from '@/store/transactions';
 
 export default function SettingsScreen() {
   const handleChangePassword = async () => {
@@ -20,6 +21,7 @@ export default function SettingsScreen() {
       'wallet-backup'
     );
     console.log('Backup wallet', backupHash);
+    await storeTransaction({ backupHash });
   };
 
   return (

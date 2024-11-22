@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, Clipboard } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import * as Crypto from 'expo-crypto';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { storeTransaction } from '@/store/transactions';
 
 export default function ReceiveScreen() {
   const [walletAddress, setWalletAddress] = useState('your-wallet-address-here');
@@ -18,6 +19,7 @@ export default function ReceiveScreen() {
       walletAddress
     );
     setWalletAddress(secureAddress);
+    await storeTransaction({ walletAddress: secureAddress });
   };
 
   return (
